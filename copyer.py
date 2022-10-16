@@ -32,22 +32,33 @@ print("Mac 复制路径快捷键 option + command + c\nWindows 复制路径 shif
 #
 
 class FilterFiles:
-    # def __int__(self, file_dir):
-    #    self.file_dir = file_dir
+    def __init__(self, file_dir: str):
+        self.file_dir = file_dir
 
-    @staticmethod
-    def filter_type(file_dir, ext_type):
+    # @staticmethod
+    def filter_type(self, ext_type):
         result_list = []
-        # print(file_dir)
-        file_list = os.listdir(file_dir)
-        # print(file_list)
+        file_list = os.listdir(self.file_dir)
         for file_name in file_list:
             if file_name.endswith(ext_type):
                 result_list.append(file_name)
-        # print(result_list)
+        return result_list
+
+    def filter_filename(self, keyword, prefix: tuple = None, suffix: tuple = None):
+        result_list = []
+        file_list = os.listdir(self.file_dir)
+        for file_name in file_list:
+            if file_name.endswith(suffix):
+                continue
+            result_list.append(file_name)
         return result_list
 
 
-# xml_filter = FilterFiles()
+# /Users/wangjiping/PycharmProjects/copyer
+# path = "jjhkjhk"
+ff = FilterFiles("/Users/wangjiping/PycharmProjects/copyer")
 
-print(FilterFiles().filter_type("/Users/WangChunsheng/PycharmProjects/copytoxml", ".py"))
+# print(FilterFiles)
+# xml_filter.__int__("/Users/wangjiping/PycharmProjects/copyer")
+
+print(ff.filter_type(".py"))
