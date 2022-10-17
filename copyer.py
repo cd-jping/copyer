@@ -36,29 +36,69 @@ class FilterFiles:
         self.file_dir = file_dir
 
     # @staticmethod
-    def filter_type(self, ext_type):
+    # def filter_type(self, ext_type):
+    #     result_list = []
+    #     file_list = os.listdir(self.file_dir)
+    #     for file_name in file_list:
+    #         if file_name.endswith(ext_type):
+    #             result_list.append(file_name)
+    #     return result_list
+
+    def filter_prefix(self, inputlist: list = None, prefix:tuple = None ):
         result_list = []
-        file_list = os.listdir(self.file_dir)
+        if inputlist != None:
+            file_list = inputlist
+        else:
+            file_list = os.listdir(self.file_dir)
+        # 遍历文件列表
         for file_name in file_list:
-            if file_name.endswith(ext_type):
-                result_list.append(file_name)
+            # 遍历 关键词
+            for pf in prefix:
+                if file_name.startswith(pf):
+                    result_list.append(file_name)
         return result_list
 
-    def filter_filename(self, keyword, prefix: tuple = None, suffix: tuple = None):
+    def filter_suffix(self,inputlist: list = None, suffix:tuple = None ):
         result_list = []
-        file_list = os.listdir(self.file_dir)
+        if inputlist != None:
+            file_list = inputlist
+            print("fei kong")
+        else:
+            file_list = os.listdir(self.file_dir)
+        # 遍历文件列表
         for file_name in file_list:
-            if file_name.endswith(suffix):
-                continue
-            result_list.append(file_name)
+            # 遍历 关键词
+            for sf in suffix:
+                if file_name.endswith(sf):
+                    result_list.append(file_name)
         return result_list
+        
+
+    # def filter_filename(self, keyword=None , prefix: tuple = None, suffix: tuple = None):
+    #     result_list = []
+    #     file_list = os.listdir(self.file_dir)
+    #     # if prefix and suffix is None:
+
+    #     if prefix != None:
+    #         for p in prefix:
+    #             if file_name.startwish(p):
+    #                 result_list.append(file_name)
+    #     if keyword != None:
+    #         file_name.find(keyword):
+    #         result_list.append(file_name)
+
+    #     for file_name in file_list:
+
+    #         if file_name.find(keyword)!= -1:
+    #             result_list.append(file_name)
+    #     return result_list
 
 
 # /Users/wangjiping/PycharmProjects/copyer
 # path = "jjhkjhk"
-ff = FilterFiles("/Users/wangjiping/PycharmProjects/copyer")
+ff = FilterFiles(r"C:\Users\YOWH\Documents\Projects\copyer\copyer")
 
 # print(FilterFiles)
 # xml_filter.__int__("/Users/wangjiping/PycharmProjects/copyer")
 
-print(ff.filter_type(".py"))
+print(ff.filter_suffix(suffix=[".py"]))
