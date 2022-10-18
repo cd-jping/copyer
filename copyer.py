@@ -15,7 +15,6 @@ class FilterFiles:
     # @staticmethod
     # def __init__(self):
     #     self.file_dir = None
-
     def filter_files(self, file_dir, prefix: list = None, suffix: list = None):
         result = {}
         count = 0
@@ -24,30 +23,17 @@ class FilterFiles:
             file_list = os.listdir(p)
         else:
             file_list = os.listdir(file_dir)
-            print(file_list)
-            print(suffix)
-            print(prefix)
-        # if prefix and suffix is None:
-        print(bool(prefix and suffix is Empty))
-        print(suffix)
-        print(prefix)
-        print("条件不满足")
-        # elif prefix or suffix is not None:
-        #     print(" dou bu wei kong ")
-        #     print(suffix)
-        # #     print(prefix)
-        # file_list = self.filter_prefix(prefix, file_list)
-        # file_list = self.filter_suffix(suffix, file_list)
-
-        print(file_list)
-        # elif prefix is None:
-        #     print("suffix run")
-        #     print(prefix)
-        #     print(suffix)
-        #     file_list = self.filter_suffix(suffix, file_list)
-        # elif suffix is None:
-        #     print("prefix run")
-        #     file_list = self.filter_prefix(prefix, file_list)
+            # print(file_list)
+        if prefix is None and suffix is None:
+            print(" error!  ")
+            return
+        elif prefix is not None and suffix is not None:
+            file_list = self.filter_prefix(prefix, file_list)
+            file_list = self.filter_suffix(suffix, file_list)
+        elif prefix is not None:
+            file_list = self.filter_prefix(prefix, file_list)
+        elif suffix is not None:
+            file_list = self.filter_suffix(suffix, file_list)
 
         for file_name in file_list:
             file_path = os.path.join(file_dir, file_name)
@@ -101,7 +87,20 @@ class FilterFiles:
         return rs
 
 
-xml_file_dir = "/Users/WangChunsheng/PycharmProjects/copyer"
+# xml_file_dir = os.getcwd()
+xml_file_dir = "/Users/wangjiping/PycharmProjects/copyer/IconRequest-20221001_122347"
 xml_path = FilterFiles()
-xml_path.filter_files(xml_file_dir)
+xp = xml_path.filter_files(xml_file_dir, prefix=["app"], suffix=[".xml"])
+da = xml_path.filter_files(xml_file_dir, suffix=[".png"])
+print(f"{xp}\n {type(xp)}")
+print(da)
 # xml_path.filter_files(xml_file_dir, prefix=["cop"], suffix=[".py"])
+
+# 获得路径
+icon_req_dir = input("输入请求包路径：\n")
+ff = FilterFiles()
+
+
+def rename_xml(result_dict: dict):
+
+    print(result_dict)

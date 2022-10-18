@@ -1,0 +1,18 @@
+<appmap>
+
+	<!-- Contacts -->
+	<item
+		class="com.samsung.android.contacts.contactslist.PeopleActivity"
+		name="contacts"/>
+
+	<!-- Iconzy -->
+	<item
+		class="com.arun.kustomiconpack.MainActivity"
+		name="iconzy"/>
+
+	<!-- Loffee -->
+	<item
+		class="com.example.aqeb.loffee.Activity.MainActivity"
+		name="loffee"/>
+
+</appmap>
