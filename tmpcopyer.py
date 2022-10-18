@@ -14,27 +14,6 @@ class FilterFiles:
         if prefix or suffix or keywords is not None:
             for file_name in file_list:
 
-                if kw is not None:
-                    for kw in keywords:
-                        # 根据 kw 匹配文件名 匹配则进入下一级
-                        if file_name.find(kw):
-                            #匹配
-                            print()
-                elif sf is not None:
-                    for sf in suffix:
-                        if file_name.endswith(sf):
-                            print()
-
-
-
-
-
-
-
-
-
-
-
 
 
 
