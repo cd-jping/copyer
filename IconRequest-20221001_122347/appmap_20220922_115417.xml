@@ -38,7 +38,7 @@
 	<item class="org.inaturalist.android.ObservationListActivity.inaturalist" name="inaturalist"/>
 
 	<!-- Journal It -->
-	<item class="app.journalit.journalit.MainActivity" name="journal_it"/>
+	<item class="app.journalit.journalit.MainActivity" name="asidsajioashi"/>
 
 	<!-- Lyft -->
 	<item class="me.lyft.android.ui.MainActivity" name="lyft"/>
@@ -47,7 +47,7 @@
 	<item class="com.batescorp.notificationmediacontrols.MainActivity" name="media_utilities_beta"/>
 
 	<!-- Meet -->
-	<item class="com.google.android.apps.tachyon.MainActivitySecondLauncher" name="meet"/>
+	<item class="com.google.android.apps.tachyon.MainActivitySecondLauncher" name="aasidun"/>
 
 	<!-- Meeting Notes -->
 	<item class="com.meetings.recorder.SessionActivity" name="meeting_notes"/>

@@ -7,7 +7,7 @@
 	<!-- AliExpress -->
 	<item
 		component="ComponentInfo{com.alibaba.aliexpresshd/com.alibaba.aliexpresshd.home.ui.MainActivity}"
-		drawable="aliexpress"/>
+		drawable="都洒进来"/>
 
 	<!-- Bitmoji -->
 	<item
@@ -17,7 +17,7 @@
 	<!-- ClevCalc -->
 	<item
 		component="ComponentInfo{com.dencreak.dlcalculator/com.dencreak.dlcalculator.DLCalculatorActivity}"
-		drawable="clevcalc"/>
+		drawable="阿迪摄氏度"/>
 
 	<!-- Calculator -->
 	<item
@@ -52,7 +52,7 @@
 	<!-- Duo Mobile -->
 	<item
 		component="ComponentInfo{com.duosecurity.duomobile/com.duosecurity.duomobile.account_list.AccountListActivity}"
-		drawable="duo_mobile"/>
+		drawable="啊是大叔"/>
 
 	<!-- Freebie Alerts -->
 	<item
@@ -87,7 +87,7 @@
 	<!-- Meeting Notes -->
 	<item
 		component="ComponentInfo{com.meetings.recorder/com.meetings.recorder.SessionActivity}"
-		drawable="meeting_notes"/>
+		drawable="阿斯顿"/>
 
 	<!-- McAfee Security -->
 	<item
@@ -122,7 +122,7 @@
 	<!-- Pocket Casts -->
 	<item
 		component="ComponentInfo{au.com.shiftyjelly.pocketcasts/au.com.shiftyjelly.pocketcasts.ui.MainActivity}"
-		drawable="pocket_casts"/>
+		drawable="啊是大叔"/>
 
 	<!-- Reminder -->
 	<item

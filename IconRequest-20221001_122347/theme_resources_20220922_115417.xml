@@ -15,7 +15,7 @@
 	<!-- Bitmoji -->
 	<AppIcon
 		name="com.bitstrips.imoji/com.bitstrips.imoji.ui.activities.LandingActivity"
-		image="bitmoji"/>
+		image="阿斯顿交流"/>
 
 	<!-- ClevCalc -->
 	<AppIcon
@@ -25,7 +25,7 @@
 	<!-- Calculator -->
 	<AppIcon
 		name="com.sec.android.app.popupcalculator/com.sec.android.app.popupcalculator.Calculator"
-		image="calculator"/>
+		image="sad即可撒喀什"/>
 
 	<!-- Clue -->
 	<AppIcon
@@ -40,7 +40,7 @@
 	<!-- DigiCal -->
 	<AppIcon
 		name="com.digibites.calendar/com.digibites.calendar.WeekAgendaActivity"
-		image="digical"/>
+		image="啊是大叔了"/>
 
 	<!-- DigiCal Key -->
 	<AppIcon
