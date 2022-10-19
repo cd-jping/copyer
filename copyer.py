@@ -9,6 +9,8 @@
 
 """
 import os
+import lxml.etree as et
+import pypinyin
 
 
 class FilterFiles:
@@ -87,20 +89,73 @@ class FilterFiles:
         return rs
 
 
-# xml_file_dir = os.getcwd()
-xml_file_dir = "/Users/wangjiping/PycharmProjects/copyer/IconRequest-20221001_122347"
-xml_path = FilterFiles()
-xp = xml_path.filter_files(xml_file_dir, prefix=["app"], suffix=[".xml"])
-da = xml_path.filter_files(xml_file_dir, suffix=[".png"])
-print(f"{xp}\n {type(xp)}")
-print(da)
-# xml_path.filter_files(xml_file_dir, prefix=["cop"], suffix=[".py"])
-
 # 获得路径
-icon_req_dir = input("输入请求包路径：\n")
+# icon_req_dir = input("输入请求包路径：\n")
+# ff = FilterFiles()
+
+
+def read_xml(result_dict: dict, find_name: str, find_node: str, find_property: str):
+    matcg_list = []
+    for key in result_dict.keys():
+        # 根据filter_name 的值 来判断key 是否匹配 筛选出来所需要处理的xml
+        if find_name in key:
+            # matcg_list.append(result_dict.get(key))
+            # for xml_file in matcg_list:
+                xml_tree = et.parse(result_dict.get(key))
+                xml_root = xml_tree.getroot()
+                count = 0
+                for item in xml_root.findall(find_node):
+                    v = item.get(find_property)
+                    if bool(is_chinese(v)):
+                        py = get_pinyin(v)
+                        item.set(find_property, py)
+                        count = count + 1
+                        # print(item)
+                print(f" {count} changes from xml_file ")
+                xml_tree.write(result_dict.get(key), encoding="utf-8", xml_declaration=True)
+            # print(key)
+    print(matcg_list)
+
+    return matcg_list
+
+
+def rename_xml(xml_file_list: list, find_node: str, chang_property: str):
+    for xml_file in xml_file_list:
+        xml_tree = et.parse(xml_file)
+        xml_root = xml_tree.getroot()
+        count = 0
+        for item in xml_root.findall(find_node):
+            v = item.get(chang_property)
+            if bool(is_chinese(v)):
+                py = get_pinyin(v)
+                item.set(chang_property, py)
+                count = count + 1
+                # print(item)
+        print(f" {count} changes from {xml_file} ")
+        xml_tree.write(xml_file, encoding="utf-8", xml_declaration=True)
+
+
+# 判断是否包含中文
+def is_chinese(string):
+    check_str = string
+    for ch in check_str:
+        if u'\u4e00' <= ch <= u'\u9fff':
+            return True
+    return False
+
+
+# 转换为Pinyin的方法
+def get_pinyin(string):
+    pinyin = pypinyin.slug(string, separator="")
+    return pinyin
+
+
+xml_file_dir = "/Users/wangjiping/PycharmProjects/copyer/IconRequest-20221001_122347"
+xml_file_dir2 = r"C:\Users\YOWH\PycharmProjects\copyer\IconRequest-20221001_122347"
+
+rdict = {"appfilter_12331": "string1", "avpfilter_2331": "strin3234g1", "appfilter_123431": "3424", }
+# read_xml(rdict, "filter")
 ff = FilterFiles()
-
-
-def rename_xml(result_dict: dict):
-
-    print(result_dict)
+rs_list = ff.filter_files(xml_file_dir2,prefix=["app","theme"],suffix=".xml")
+appmaplist = read_xml(rs_list,"appmap","item","name")
+# rename_xml(appmaplist,"item","name")

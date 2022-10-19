@@ -1,18 +1,13 @@
+<?xml version='1.0' encoding='UTF-8'?>
 <appmap>
 
 	<!-- Contacts -->
-	<item
-		class="com.samsung.android.contacts.contactslist.PeopleActivity"
-		name="contacts"/>
+	<item class="com.samsung.android.contacts.contactslist.PeopleActivity" name="contacts"/>
 
 	<!-- Iconzy -->
-	<item
-		class="com.arun.kustomiconpack.MainActivity"
-		name="iconzy"/>
+	<item class="com.arun.kustomiconpack.MainActivity" name="aikuang"/>
 
 	<!-- Loffee -->
-	<item
-		class="com.example.aqeb.loffee.Activity.MainActivity"
-		name="loffee"/>
+	<item class="com.example.aqeb.loffee.Activity.MainActivity" name="gefei"/>
 
 </appmap>

@@ -1,0 +1,192 @@
+<resources>
+	<iconback img1="iconback"/>
+	<iconmask img1="iconmask"/>
+	<iconupon img1="iconupon"/>
+	<scale factor="1.0"/>
+
+	<!-- AliExpress -->
+	<item
+		component="ComponentInfo{com.alibaba.aliexpresshd/com.alibaba.aliexpresshd.home.ui.MainActivity}"
+		drawable="aliexpress"/>
+
+	<!-- Bitmoji -->
+	<item
+		component="ComponentInfo{com.bitstrips.imoji/com.bitstrips.imoji.ui.activities.LandingActivity}"
+		drawable="bitmoji"/>
+
+	<!-- ClevCalc -->
+	<item
+		component="ComponentInfo{com.dencreak.dlcalculator/com.dencreak.dlcalculator.DLCalculatorActivity}"
+		drawable="clevcalc"/>
+
+	<!-- Calculator -->
+	<item
+		component="ComponentInfo{com.sec.android.app.popupcalculator/com.sec.android.app.popupcalculator.Calculator}"
+		drawable="calculator"/>
+
+	<!-- Clue -->
+	<item
+		component="ComponentInfo{com.clue.android/com.biowink.clue.splash.SplashActivity}"
+		drawable="clue"/>
+
+	<!-- Craigslist -->
+	<item
+		component="ComponentInfo{org.craigslist.CraigslistMobile/org.craigslist.CraigslistMobile.MainActivity}"
+		drawable="craigslist"/>
+
+	<!-- DigiCal -->
+	<item
+		component="ComponentInfo{com.digibites.calendar/com.digibites.calendar.WeekAgendaActivity}"
+		drawable="digical"/>
+
+	<!-- DigiCal Key -->
+	<item
+		component="ComponentInfo{com.digibites.calendarplus/com.digibites.calendarplus.InfoActivity}"
+		drawable="digical_key"/>
+
+	<!-- Discord -->
+	<item
+		component="ComponentInfo{com.discord/com.discord.main.MainActivity}"
+		drawable="discord"/>
+
+	<!-- Duo Mobile -->
+	<item
+		component="ComponentInfo{com.duosecurity.duomobile/com.duosecurity.duomobile.account_list.AccountListActivity}"
+		drawable="duo_mobile"/>
+
+	<!-- Freebie Alerts -->
+	<item
+		component="ComponentInfo{com.rodolfogs.nextdooralerts/host.exp.exponent.MainActivity}"
+		drawable="freebie_alerts"/>
+
+	<!-- INaturalist -->
+	<item
+		component="ComponentInfo{org.inaturalist.android/org.inaturalist.android.ObservationListActivity.inaturalist}"
+		drawable="inaturalist"/>
+
+	<!-- Journal It -->
+	<item
+		component="ComponentInfo{org.de_studio.diary/app.journalit.journalit.MainActivity}"
+		drawable="journal_it"/>
+
+	<!-- Lyft -->
+	<item
+		component="ComponentInfo{me.lyft.android/me.lyft.android.ui.MainActivity}"
+		drawable="lyft"/>
+
+	<!-- Media Utilities Beta -->
+	<item
+		component="ComponentInfo{com.batescorp.notificationmediacontrols.alpha/com.batescorp.notificationmediacontrols.MainActivity}"
+		drawable="media_utilities_beta"/>
+
+	<!-- Meet -->
+	<item
+		component="ComponentInfo{com.google.android.apps.tachyon/com.google.android.apps.tachyon.MainActivitySecondLauncher}"
+		drawable="meet"/>
+
+	<!-- Meeting Notes -->
+	<item
+		component="ComponentInfo{com.meetings.recorder/com.meetings.recorder.SessionActivity}"
+		drawable="meeting_notes"/>
+
+	<!-- McAfee Security -->
+	<item
+		component="ComponentInfo{com.wsandroid.suite.tmobile/com.mcafee.app.LauncherDelegateActivity}"
+		drawable="mcafee_security"/>
+
+	<!-- MoodTools -->
+	<item
+		component="ComponentInfo{com.moodtools.moodtools/com.moodtools.moodtools.MainActivity}"
+		drawable="moodtools"/>
+
+	<!-- My Files -->
+	<item
+		component="ComponentInfo{com.sec.android.app.myfiles/com.sec.android.app.myfiles.external.ui.MainActivity}"
+		drawable="my_files"/>
+
+	<!-- Nebula -->
+	<item
+		component="ComponentInfo{tv.standard.nebula/tv.standard.nebula.auth.splash.view.activities.SplashActivity}"
+		drawable="nebula"/>
+
+	<!-- Nextdoor -->
+	<item
+		component="ComponentInfo{com.nextdoor/com.nextdoor.registrationUi.nux.LoadAppConfigurationActivity}"
+		drawable="nextdoor"/>
+
+	<!-- OfferUp -->
+	<item
+		component="ComponentInfo{com.offerup/com.offerup.MainActivity}"
+		drawable="offerup"/>
+
+	<!-- Pocket Casts -->
+	<item
+		component="ComponentInfo{au.com.shiftyjelly.pocketcasts/au.com.shiftyjelly.pocketcasts.ui.MainActivity}"
+		drawable="pocket_casts"/>
+
+	<!-- Reminder -->
+	<item
+		component="ComponentInfo{com.samsung.android.app.reminder/com.samsung.android.app.reminder.ui.LaunchMainActivity}"
+		drawable="reminder"/>
+
+	<!-- Raindrop -->
+	<item
+		component="ComponentInfo{io.raindrop.raindropio/io.raindrop.raindropio.MainActivity}"
+		drawable="raindrop"/>
+
+	<!-- SHEIN -->
+	<item
+		component="ComponentInfo{com.zzkko/com.shein.welcome.WelcomeActivity}"
+		drawable="shein"/>
+
+	<!-- Screen Alive -->
+	<item
+		component="ComponentInfo{in.snapcore.screen_alive/in.snapcore.screen_alive.view.FreeActivity}"
+		drawable="screen_alive"/>
+
+	<!-- Shopping List -->
+	<item
+		component="ComponentInfo{com.bitwize10.supersimpleshoppinglist/com.bitwize10.supersimpleshoppinglist.MainActivity}"
+		drawable="shopping_list"/>
+
+	<!-- Skit -->
+	<item
+		component="ComponentInfo{com.pavelrekun.skit.premium/com.pavelrekun.skit.base.BaseActivity}"
+		drawable="skit"/>
+
+	<!-- Slack -->
+	<item
+		component="ComponentInfo{com.Slack/slack.features.home.HomeActivity}"
+		drawable="slack"/>
+
+	<!-- Smart Switch -->
+	<item
+		component="ComponentInfo{com.sec.android.easyMover/com.sec.android.easyMover.DistributionActivity}"
+		drawable="smart_switch"/>
+
+	<!-- T Mobile -->
+	<item
+		component="ComponentInfo{com.tmobile.pr.mytmobile/com.tmobile.pr.mytmobile.MyTMobileActivity}"
+		drawable="t_mobile"/>
+
+	<!-- Tenor GIF Keyboard -->
+	<item
+		component="ComponentInfo{com.riffsy.FBMGIFApp/com.riffsy.ui.activity.SplashActivity}"
+		drawable="tenor_gif_keyboard"/>
+
+	<!-- Tips -->
+	<item
+		component="ComponentInfo{com.samsung.android.app.tips/com.samsung.android.app.tips.TipsMainActivity}"
+		drawable="tips"/>
+
+	<!-- Visual Voicemail -->
+	<item
+		component="ComponentInfo{com.tmobile.vvm.application/com.tmobile.vvm.application.activity.setup.WelcomeActivity}"
+		drawable="visual_voicemail"/>
+
+	<!-- WorkingHours -->
+	<item
+		component="ComponentInfo{partl.workinghours/crc64fb58026811c8a4fb.MainActivity}"
+		drawable="workinghours"/>
+
+</resources>
