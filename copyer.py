@@ -245,7 +245,26 @@ rename_file(png_list, file_dir=png_dir)
 xml_dict = ff.filter_files(xml_file_dir, prefix=["appfilter", "appmap", "theme_resources"], suffix=[".xml"])
 edit_xml(xml_dict, "appmap", "item", "name")
 
+# project_dir = input("输入包含替换资源的项目文件夹\n")
+# name = "appfilter"
 
+route = input('请输入要查找的路径：')
+name = input('请输入要查找的文件：')
+
+
+def find_file(project_dir: str, find_name: str):
+    file_list = os.listdir(project_dir)
+    for file in file_list:
+        file_path = os.path.join(project_dir, file)
+        if os.path.isfile(file_path):
+            if find_name in file:
+                print(file_path)
+                # break
+        else:
+            find_file(file_path, find_name)
+
+
+# find_file(route, name)
 # 处理 目标路径
 # 获得1⃣️设计图标路径
 # 生成xml信息在目标路径 （拷贝的方法需要修改
