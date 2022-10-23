@@ -9,7 +9,7 @@
 
 """
 import os
-import lxml.etree as lxmlET
+import lxml.etree as lxml_et
 import pypinyin
 import xml.dom.minidom
 
@@ -97,11 +97,6 @@ class FilterFiles:
                         item = os.path.splitext(item)[0]
                     rs.append(item)
         return rs
-
-
-# 获得路径
-# icon_req_dir = input("输入请求包路径：\n")
-# ff = FilterFiles()
 
 
 # 判断是否包含中文
@@ -198,7 +193,7 @@ def pinyinized_xml(result_dict: dict, find_name: str, find_node: str, find_prope
         if find_name in key:
             # match_list.append(result_dict.get(key))
             # for xml_file in match_list:
-            xml_tree = lxmlET.parse(result_dict.get(key))
+            xml_tree = lxml_et.parse(result_dict.get(key))
             xml_root = xml_tree.getroot()
 
             count = 0
@@ -214,50 +209,55 @@ def pinyinized_xml(result_dict: dict, find_name: str, find_node: str, find_prope
 
 
 #  project_dir: dict, png_list, req_name: str,
-def move_xml_info(req_xml_dir: dict, project_xml_dir: dict, png_list, req_name: str, appfilter_num: int=None):
+def move_xml_info(req_xml_dir: dict, project_xml_dir: dict, pnglist: list, req_name: str, appfilter_num: int):
     for pro_key in project_xml_dir.keys():
         if "appfilter" in pro_key:
-
+            xml_filter = open(project_xml_dir.get(pro_key), "r", encoding="utf-8")
+            line_list = xml_filter.readlines()
+            for line_item in line_list:
+                if req_name in line_item:
+                    print(f"{req_name} 已适配")
+                    return
     # 追加xml节点信息
     for req_key in req_xml_dir.keys():
         # 根据filter_name 的值 来判断key 是否匹配 筛选出来所需要处理的xml
         if "appfilter" in req_key:
-            req_xml_tree = lxmlET.parse(req_xml_dir.get(req_key))
+            req_xml_tree = lxml_et.parse(req_xml_dir.get(req_key))
             req_xml_root = req_xml_tree.getroot()
             del_list = ["iconback", "iconmask", "iconupon", "scale"]
             for i in del_list:
                 req_xml_root.remove(req_xml_root.find(i))
             for pro_key in project_xml_dir:
                 if "appfilter" in pro_key:
-                    pro_xml_tree = lxmlET.parse(project_xml_dir.get(pro_key))
+                    pro_xml_tree = lxml_et.parse(project_xml_dir.get(pro_key))
                     pro_xml_root = pro_xml_tree.getroot()
                     num = len(req_xml_root.findall("item"))
                     for item in req_xml_root.iter("appfilter"):
                         pro_xml_root.extend(item)
-                    comments = lxmlET.Comment(f"⬆ {req_key} updated, {num} ⬆")
+                    comments = lxml_et.Comment(f"⬆ {req_key} updated, {num} ⬆")
                     comments.tail = "\n"
                     pro_xml_root.append(comments)
                     pro_xml_tree.write(project_xml_dir.get(pro_key), encoding="utf-8", xml_declaration=True)
 
         if "appmap" in req_key:
-            req_xml_tree = lxmlET.parse(req_xml_dir.get(req_key))
+            req_xml_tree = lxml_et.parse(req_xml_dir.get(req_key))
             req_xml_root = req_xml_tree.getroot()
             # del_list = ["iconback", "iconmask", "iconupon", "scale"]
             # for i in del_list:
             #     req_xml_root.remove(req_xml_root.find(i))
             for pro_key in project_xml_dir:
                 if "appmap" in pro_key:
-                    pro_xml_tree = lxmlET.parse(project_xml_dir.get(pro_key))
+                    pro_xml_tree = lxml_et.parse(project_xml_dir.get(pro_key))
                     pro_xml_root = pro_xml_tree.getroot()
                     num = len(req_xml_root.findall("item"))
                     for item in req_xml_root.iter("appmap"):
                         pro_xml_root.extend(item)
-                    comments = lxmlET.Comment(f"⬆ {req_key} updated, {num} ⬆")
+                    comments = lxml_et.Comment(f"⬆ {req_key} updated, {num} ⬆")
                     comments.tail = "\n"
                     pro_xml_root.append(comments)
                     pro_xml_tree.write(project_xml_dir.get(pro_key), encoding="utf-8", xml_declaration=True)
         if "theme_resources" in req_key:
-            req_xml_tree = lxmlET.parse(req_xml_dir.get(req_key))
+            req_xml_tree = lxml_et.parse(req_xml_dir.get(req_key))
             req_xml_root = req_xml_tree.getroot()
             del_list = ["Label", "Wallpaper", "LockScreenWallpaper", "ThemePreview", "ThemePreviewWork",
                         "ThemePreviewMenu", "DockMenuAppIcon"]
@@ -265,12 +265,12 @@ def move_xml_info(req_xml_dir: dict, project_xml_dir: dict, png_list, req_name: 
                 req_xml_root.remove(req_xml_root.find(i))
             for pro_key in project_xml_dir:
                 if "theme_resources" in pro_key:
-                    pro_xml_tree = lxmlET.parse(project_xml_dir.get(pro_key))
+                    pro_xml_tree = lxml_et.parse(project_xml_dir.get(pro_key))
                     pro_xml_root = pro_xml_tree.getroot()
                     num = len(req_xml_root.findall("AppIcon"))
                     for item in req_xml_root.iter("Theme"):
                         pro_xml_root.extend(item)
-                    comments = lxmlET.Comment(f"⬆ {req_key} updated, {num} ⬆")
+                    comments = lxml_et.Comment(f"⬆ {req_key} updated, {num} ⬆")
                     comments.tail = "\n"
                     pro_xml_root.append(comments)
                     pro_xml_tree.write(project_xml_dir.get(pro_key), encoding="utf-8", xml_declaration=True)
@@ -279,18 +279,18 @@ def move_xml_info(req_xml_dir: dict, project_xml_dir: dict, png_list, req_name: 
     for pro_key in project_xml_dir.keys():
         # icon_pack 资源生成
         if "icon_pack" in pro_key:
-            icon_pack_tree = lxmlET.parse(project_xml_dir.get(pro_key))
+            icon_pack_tree = lxml_et.parse(project_xml_dir.get(pro_key), parser=lxml_et.XMLParser(encoding="utf-8", remove_blank_text=True))
             icon_pack_root = icon_pack_tree.getroot()
             if icon_pack_root.find("./starry-array/[@name='Adaptation']") is None:
-                tar_tag = lxmlET.Element("starry-array", name="Adaptation")
+                tar_tag = lxml_et.Element("starry-array", name="Adaptation")
             else:
                 tar_tag = icon_pack_root.find("./starry-array/[@name='Adaptation']")
-            num = len(png_list)
-            for png_name in png_list:
-                item = lxmlET.Element("item")
+            num = len(pnglist)
+            for png_name in pnglist:
+                item = lxml_et.Element("item")
                 item.text = png_name
                 tar_tag.insert(0, item)
-            comments = lxmlET.Comment(f"⬇ {num} icons updated ⬇")
+            comments = lxml_et.Comment(f"⬇ {num} icons updated ⬇")
             tar_tag.insert(0, comments)
             icon_pack_tree.write(project_xml_dir.get(pro_key), encoding="utf-8", xml_declaration=True,
                                  pretty_print=True)
@@ -298,20 +298,20 @@ def move_xml_info(req_xml_dir: dict, project_xml_dir: dict, png_list, req_name: 
         # drawable 资源生成
         if "drawable" in pro_key:
             # resources
-            drawable_tree = lxmlET.parse(project_xml_dir.get(pro_key),
-                                         parser=lxmlET.XMLParser(encoding="utf-8", remove_blank_text=True))
+            drawable_tree = lxml_et.parse(project_xml_dir.get(pro_key),
+                                          parser=lxml_et.XMLParser(encoding="utf-8", remove_blank_text=True))
             drawable_root = drawable_tree.getroot()
             if drawable_root.find("./category/[@title='System ICONS']") is None:
-                tar_tag = lxmlET.Element("category", name="System ICONS")
+                tar_tag = lxml_et.Element("category", name="System ICONS")
                 drawable_root.append(tar_tag)
             else:
                 tar_tag = drawable_root.find("./category/[@title='System ICONS']")
-            num = len(png_list)
-            for png_name in png_list:
-                item = lxmlET.Element("item")
+            num = len(pnglist)
+            for png_name in pnglist:
+                item = lxml_et.Element("item")
                 item.set("drawable", png_name)
                 tar_tag.addnext(item)
-            comments = lxmlET.Comment(f"⬇ {num} icons updated ⬇")
+            comments = lxml_et.Comment(f"⬇ {num} icons updated ⬇")
             tar_tag.addnext(comments)
             drawable_tree.write(project_xml_dir.get(pro_key), encoding="utf-8", xml_declaration=True,
                                 pretty_print=True)
@@ -319,24 +319,19 @@ def move_xml_info(req_xml_dir: dict, project_xml_dir: dict, png_list, req_name: 
         if "changelog" in pro_key:
 
             # resources
-            changelog_tree = lxmlET.parse(project_xml_dir.get(pro_key))
+            changelog_tree = lxml_et.parse(project_xml_dir.get(pro_key))
             changelog_root = changelog_tree.getroot()
             if changelog_root.find("./item/[@number]") is None:
-                tar_tag = lxmlET.Element("item", number="0")
+                tar_tag = lxml_et.Element("item", number="0")
                 changelog_root.append(tar_tag)
             else:
                 tar_tag = changelog_root.find("./item/[@number]")
             xml_number = tar_tag.get("number")
             number = appfilter_num + int(xml_number)
             tar_tag.set("number", str(number))
-            tar_tag.set("text", f"{number} icons updated!")
-            num = len(png_list)
-            for png_name in png_list:
-                item = lxmlET.Element("item")
-                item.set("drawable", png_name)
-                tar_tag.addnext(item)
-            comments = lxmlET.Comment(f"⬇ {num} icons updated ⬇")
-            tar_tag.addnext(comments)
+            tar_tag.set("text", f"{number} icons updated!\n{number} 个图标已适配!")
+            changelog_tree.write(project_xml_dir.get(pro_key), encoding="utf-8", xml_declaration=True,
+                                 pretty_print=True)
         # 复制 png 资源（考虑覆盖问题）
 
 
@@ -352,7 +347,6 @@ def find_file(project_dir: str, find_name: str):
                 file = file + str(count)
                 find_xml.update({file: file_path})
                 print(file_path)
-                # break
         else:
             find_file(file_path, find_name)
     return find_xml
