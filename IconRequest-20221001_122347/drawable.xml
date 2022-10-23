@@ -3,6 +3,12 @@
   <version>1</version>
   <category title="More ICONS Open       ↗ "/>
   <category title="System ICONS"/>
+  <!--⬇ 12 icons updated ⬇-->
+  <item drawable="TEST_Text"/>
+  <item drawable="TEST_Text"/>
+  <item drawable="TEST_Text"/>
+  <item drawable="TEST_Text"/>
+  <item drawable="TEST_Text"/>
   <item drawable="app_store"/>
   <item drawable="browser"/>
   <item drawable="calculator"/>

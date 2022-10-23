@@ -49,7 +49,7 @@ class FilterFiles:
 
     # @staticmethod
     @staticmethod
-    def filter_prefix(prefix: list, file_list: list = None, file_dir=None):
+    def filter_prefix(prefix: list, file_list: list = None, file_dir=None, with_ext_name=True):
         rs = []
         # if file_dir and file_list is None:
         #     p = os.getcwd()
@@ -67,13 +67,15 @@ class FilterFiles:
         for item in file_list:
             for pf in prefix:
                 if item.startswith(pf):
+                    if with_ext_name is False:
+                        item = os.path.splitext(item)[0]
                     rs.append(item)
 
         return rs
 
     # @staticmethod
     @staticmethod
-    def filter_suffix(suffix: list, file_list: list = None, file_dir=None):
+    def filter_suffix(suffix: list, file_list: list = None, file_dir=None, with_ext_name: bool = True):
         rs = []
         # if file_dir and file_list is None:
         #     p = os.getcwd()
@@ -91,6 +93,8 @@ class FilterFiles:
         for item in file_list:
             for sf in suffix:
                 if item.endswith(sf):
+                    if with_ext_name is False:
+                        item = os.path.splitext(item)[0]
                     rs.append(item)
         return rs
 
@@ -210,27 +214,130 @@ def pinyinized_xml(result_dict: dict, find_name: str, find_node: str, find_prope
 
 
 #  project_dir: dict, png_list, req_name: str,
-def move_xml_info(req_xml_dir: dict, project_dir: dict, png_list, req_name: str):
+def move_xml_info(req_xml_dir: dict, project_xml_dir: dict, png_list, req_name: str, appfilter_num: int=None):
+    for pro_key in project_xml_dir.keys():
+        if "appfilter" in pro_key:
+
+    # 追加xml节点信息
     for req_key in req_xml_dir.keys():
         # 根据filter_name 的值 来判断key 是否匹配 筛选出来所需要处理的xml
         if "appfilter" in req_key:
             req_xml_tree = lxmlET.parse(req_xml_dir.get(req_key))
             req_xml_root = req_xml_tree.getroot()
-            req_xml_root.remove(req_xml_root.find("iconback"))
-            req_xml_root.remove(req_xml_root.find("iconmask"))
-            req_xml_root.remove(req_xml_root.find("iconupon"))
-            req_xml_root.remove(req_xml_root.find("scale"))
-            for pro_key in project_dir:
+            del_list = ["iconback", "iconmask", "iconupon", "scale"]
+            for i in del_list:
+                req_xml_root.remove(req_xml_root.find(i))
+            for pro_key in project_xml_dir:
                 if "appfilter" in pro_key:
-                    pro_xml_tree = lxmlET.parse(project_dir.get(pro_key))
+                    pro_xml_tree = lxmlET.parse(project_xml_dir.get(pro_key))
                     pro_xml_root = pro_xml_tree.getroot()
-                    pro_xml_root.extend(req_xml_root.findall("*"))
+                    num = len(req_xml_root.findall("item"))
+                    for item in req_xml_root.iter("appfilter"):
+                        pro_xml_root.extend(item)
+                    comments = lxmlET.Comment(f"⬆ {req_key} updated, {num} ⬆")
+                    comments.tail = "\n"
+                    pro_xml_root.append(comments)
+                    pro_xml_tree.write(project_xml_dir.get(pro_key), encoding="utf-8", xml_declaration=True)
 
-            req_xml_tree.write(req_xml_dir.get(key), encoding="utf-8", xml_declaration=True)
-            print("ok")
-            count = 0
+        if "appmap" in req_key:
+            req_xml_tree = lxmlET.parse(req_xml_dir.get(req_key))
+            req_xml_root = req_xml_tree.getroot()
+            # del_list = ["iconback", "iconmask", "iconupon", "scale"]
+            # for i in del_list:
+            #     req_xml_root.remove(req_xml_root.find(i))
+            for pro_key in project_xml_dir:
+                if "appmap" in pro_key:
+                    pro_xml_tree = lxmlET.parse(project_xml_dir.get(pro_key))
+                    pro_xml_root = pro_xml_tree.getroot()
+                    num = len(req_xml_root.findall("item"))
+                    for item in req_xml_root.iter("appmap"):
+                        pro_xml_root.extend(item)
+                    comments = lxmlET.Comment(f"⬆ {req_key} updated, {num} ⬆")
+                    comments.tail = "\n"
+                    pro_xml_root.append(comments)
+                    pro_xml_tree.write(project_xml_dir.get(pro_key), encoding="utf-8", xml_declaration=True)
+        if "theme_resources" in req_key:
+            req_xml_tree = lxmlET.parse(req_xml_dir.get(req_key))
+            req_xml_root = req_xml_tree.getroot()
+            del_list = ["Label", "Wallpaper", "LockScreenWallpaper", "ThemePreview", "ThemePreviewWork",
+                        "ThemePreviewMenu", "DockMenuAppIcon"]
+            for i in del_list:
+                req_xml_root.remove(req_xml_root.find(i))
+            for pro_key in project_xml_dir:
+                if "theme_resources" in pro_key:
+                    pro_xml_tree = lxmlET.parse(project_xml_dir.get(pro_key))
+                    pro_xml_root = pro_xml_tree.getroot()
+                    num = len(req_xml_root.findall("AppIcon"))
+                    for item in req_xml_root.iter("Theme"):
+                        pro_xml_root.extend(item)
+                    comments = lxmlET.Comment(f"⬆ {req_key} updated, {num} ⬆")
+                    comments.tail = "\n"
+                    pro_xml_root.append(comments)
+                    pro_xml_tree.write(project_xml_dir.get(pro_key), encoding="utf-8", xml_declaration=True)
 
-    print()
+    # 根据 png 生成 drawable 和 icon_pack 节点并追加到 目标路径
+    for pro_key in project_xml_dir.keys():
+        # icon_pack 资源生成
+        if "icon_pack" in pro_key:
+            icon_pack_tree = lxmlET.parse(project_xml_dir.get(pro_key))
+            icon_pack_root = icon_pack_tree.getroot()
+            if icon_pack_root.find("./starry-array/[@name='Adaptation']") is None:
+                tar_tag = lxmlET.Element("starry-array", name="Adaptation")
+            else:
+                tar_tag = icon_pack_root.find("./starry-array/[@name='Adaptation']")
+            num = len(png_list)
+            for png_name in png_list:
+                item = lxmlET.Element("item")
+                item.text = png_name
+                tar_tag.insert(0, item)
+            comments = lxmlET.Comment(f"⬇ {num} icons updated ⬇")
+            tar_tag.insert(0, comments)
+            icon_pack_tree.write(project_xml_dir.get(pro_key), encoding="utf-8", xml_declaration=True,
+                                 pretty_print=True)
+
+        # drawable 资源生成
+        if "drawable" in pro_key:
+            # resources
+            drawable_tree = lxmlET.parse(project_xml_dir.get(pro_key),
+                                         parser=lxmlET.XMLParser(encoding="utf-8", remove_blank_text=True))
+            drawable_root = drawable_tree.getroot()
+            if drawable_root.find("./category/[@title='System ICONS']") is None:
+                tar_tag = lxmlET.Element("category", name="System ICONS")
+                drawable_root.append(tar_tag)
+            else:
+                tar_tag = drawable_root.find("./category/[@title='System ICONS']")
+            num = len(png_list)
+            for png_name in png_list:
+                item = lxmlET.Element("item")
+                item.set("drawable", png_name)
+                tar_tag.addnext(item)
+            comments = lxmlET.Comment(f"⬇ {num} icons updated ⬇")
+            tar_tag.addnext(comments)
+            drawable_tree.write(project_xml_dir.get(pro_key), encoding="utf-8", xml_declaration=True,
+                                pretty_print=True)
+        # project 路径里面 统计app filter 的总item数量 减去上次的数字
+        if "changelog" in pro_key:
+
+            # resources
+            changelog_tree = lxmlET.parse(project_xml_dir.get(pro_key))
+            changelog_root = changelog_tree.getroot()
+            if changelog_root.find("./item/[@number]") is None:
+                tar_tag = lxmlET.Element("item", number="0")
+                changelog_root.append(tar_tag)
+            else:
+                tar_tag = changelog_root.find("./item/[@number]")
+            xml_number = tar_tag.get("number")
+            number = appfilter_num + int(xml_number)
+            tar_tag.set("number", str(number))
+            tar_tag.set("text", f"{number} icons updated!")
+            num = len(png_list)
+            for png_name in png_list:
+                item = lxmlET.Element("item")
+                item.set("drawable", png_name)
+                tar_tag.addnext(item)
+            comments = lxmlET.Comment(f"⬇ {num} icons updated ⬇")
+            tar_tag.addnext(comments)
+        # 复制 png 资源（考虑覆盖问题）
 
 
 def find_file(project_dir: str, find_name: str):
@@ -249,6 +356,8 @@ def find_file(project_dir: str, find_name: str):
         else:
             find_file(file_path, find_name)
     return find_xml
+
+
 # find_file(route, name)
 # 处理 目标路径
 # 获得1⃣️设计图标路径
@@ -270,11 +379,13 @@ ff = FilterFiles()
 # rename_xml(appmaplist,"item","name")
 
 png_dir = "/Users/WangChunsheng/PycharmProjects/copyer/IconRequest-20221001_122347"
-# png_list = ff.filter_suffix(suffix=[".png"], file_list=None,
-#                             file_dir="/Users/WangChunsheng/PycharmProjects/copyer/IconRequest-20221001_122347")
-# print(png_list)
+png_dir2 = "/Users/wangjiping/PycharmProjects/copyer/IconRequest-20221001_122347"
+png_list = ff.filter_suffix(suffix=[".png"], file_list=None,
+                            file_dir=png_dir2, with_ext_name=False)
+
+print(png_list)
 # rename_file(png_list, file_dir=png_dir)
-xml_dict = ff.filter_files(xml_file_dir3, prefix=["appfilter", "appmap", "theme_resources"], suffix=[".xml"])
+xml_dict = ff.filter_files(xml_file_dir, prefix=["appfilter", "appmap", "theme_resources"], suffix=[".xml"])
 print(xml_dict)
 pinyinized_xml(xml_dict, "theme", "AppIcon", "image")
 
@@ -290,7 +401,6 @@ move_xml_info(xml_dict)
 再 project xml dict 里面找 对应文件 appmap 文件
 
 """
-
 
 # 判断文件夹名称 是否拷贝过 在目标文件注释里面
 # 第一步获取列表时候 保存一个变量 用于后续比对
