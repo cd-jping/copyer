@@ -218,15 +218,25 @@ def move_xml_info(req_xml_dir: dict, project_xml_dir: dict, pnglist: list, req_n
                         return
     # 追加xml节点信息
     for req_key in req_xml_dir.keys():
+        print(req_key)
         # 根据filter_name 的值 来判断key 是否匹配 筛选出来所需要处理的xml
         if "appfilter" in req_key:
+            print(req_xml_dir.get(req_key))
             req_xml_tree = lxml_et.parse(req_xml_dir.get(req_key))
             req_xml_root = req_xml_tree.getroot()
+            print(req_xml_root.tag)
             del_list = ["iconback", "iconmask", "iconupon", "scale"]
+            print("get tree")
             for i in del_list:
+                print(req_xml_root.find(i))
                 req_xml_root.remove(req_xml_root.find(i))
-            for pro_key in project_xml_dir:
+                print(f"shanchu jiedian {req_xml_root.find(i)}")
+            req_xml_tree.wirte(req_xml_dir.get(req_key), encoding="utf-8", xml_declaration=True)
+            print(project_xml_dir.keys())
+            for pro_key in project_xml_dir.keys():
+                print(pro_key)
                 if "appfilter" in pro_key:
+                    print( "appfilter from project")
                     pro_xml_tree = lxml_et.parse(project_xml_dir.get(pro_key))
                     pro_xml_root = pro_xml_tree.getroot()
                     num = len(req_xml_root.findall("item"))
@@ -244,7 +254,7 @@ def move_xml_info(req_xml_dir: dict, project_xml_dir: dict, pnglist: list, req_n
             # del_list = ["iconback", "iconmask", "iconupon", "scale"]
             # for i in del_list:
             #     req_xml_root.remove(req_xml_root.find(i))
-            for pro_key in project_xml_dir:
+            for pro_key in project_xml_dir.keys():
                 if "appmap" in pro_key:
                     pro_xml_tree = lxml_et.parse(project_xml_dir.get(pro_key))
                     pro_xml_root = pro_xml_tree.getroot()
@@ -263,7 +273,7 @@ def move_xml_info(req_xml_dir: dict, project_xml_dir: dict, pnglist: list, req_n
                         "ThemePreviewMenu", "DockMenuAppIcon"]
             for i in del_list:
                 req_xml_root.remove(req_xml_root.find(i))
-            for pro_key in project_xml_dir:
+            for pro_key in project_xml_dir.keys():
                 if "theme_resources" in pro_key:
                     pro_xml_tree = lxml_et.parse(project_xml_dir.get(pro_key))
                     pro_xml_root = pro_xml_tree.getroot()
@@ -454,23 +464,24 @@ def menu_number(input_str: str):
             png_number = ff.filter_suffix(suffix=[".png"], file_dir=req_icon_dir)
             icon_number = len(png_number)
             req_name = list(req_xml_dict.keys())
-            project_dir = user_input(tipinf="请输入项目文件夹路径\nq:退出")
-            if project_dir == "q":
-                menu_number("q")
+            project_dir = user_input(tipinf="请输入项目文件夹路径\nq:退出\n")
+            # if project_dir == "q":
+            #     menu_number("q")
+            print("p xml ")
             project_xml_dict = find_file(project_dir,
                                          find_name=["appfilter", "appmap", "theme_resources", "drawable", "icon_pack"])
 
             # reqname 改成list；
             # get pngicondir
-            png_dir = user_input(tipinf="请输入 已制作图标 文件夹路径\nq:退出")
-            if req_icon_dir == "q":
-                menu_number("q")
-            png_list = ff.filter_suffix(suffix=[".png"], file_dir=png_dir)
-
+            png_dir = user_input(tipinf="请输入 已制作图标 文件夹路径\nq:退出\n")
+            # if req_icon_dir == "q":
+            #     menu_number("q")
+            png_list = ff.filter_suffix(suffix=[".png"], file_dir=png_dir,with_ext_name=False)
+            print(png_list)
             move_xml_info(req_xml_dict, project_xml_dir=project_xml_dict, appfilter_num=icon_number, req_name=req_name,
                           pnglist=png_list)
 
-            print("2")
+            # print("2")
         case "q" | "Q":
             print("exit")
             exit()
@@ -493,6 +504,35 @@ menulist = """
 # ff = FilterFiles()
 tip = "拷贝文件夹路径快捷键\nmacOS:\toption + command + c\nWindows:\tshift + RightClick\n"
 print(tip)
-input_number = input(menulist)
+# input_number = input(menulist)
 ff = FilterFiles()
-menu_number(input_number)
+# menu_number(input_number)
+
+
+
+# req_icon_dir = user_input(tipinf="请输入 req_icon 文件夹路径\nq:退出\n")
+req_icon_dir = "/Users/WangChunsheng/Downloads/IconRequest-20221013_222149"
+
+req_xml_dict = ff.filter_files(file_dir=req_icon_dir, prefix=["appfilter", "appmap", "theme_resources"],
+                               suffix=[".xml"])
+png_number = ff.filter_suffix(suffix=[".png"], file_dir=req_icon_dir)
+icon_number = len(png_number)
+req_name = list(req_xml_dict.keys())
+# project_dir = user_input(tipinf="请输入项目文件夹路径\nq:退出\n")
+project_dir = "/Users/WangChunsheng/Downloads/demo"
+# if project_dir == "q":
+#     menu_number("q")
+print("p xml ")
+project_xml_dict = find_file(project_dir,
+                             find_name=["appfilter", "appmap", "theme_resources", "drawable", "icon_pack"])
+
+# reqname 改成list；
+# get pngicondir
+# png_dir = user_input(tipinf="请输入 已制作图标 文件夹路径\nq:退出\n")
+png_dir = "/Users/WangChunsheng/Downloads/IconRequest-20221013_222149"
+# if req_icon_dir == "q":
+#     menu_number("q")
+png_list = ff.filter_suffix(suffix=[".png"], file_dir=png_dir,with_ext_name=False)
+print(png_list)
+move_xml_info(req_xml_dict, project_xml_dir=project_xml_dict, appfilter_num=icon_number, req_name=req_name,
+              pnglist=png_list)
