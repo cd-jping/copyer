@@ -1,13 +1,13 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources>
 	<!-- AliExpress -->
-	<item component="ComponentInfo{com.alibaba.aliexpresshd/com.alibaba.aliexpresshd.home.ui.MainActivity}" drawable="都洒进来"/>
+	<item component="ComponentInfo{com.alibaba.aliexpresshd/com.alibaba.aliexpresshd.home.ui.MainActivity}" drawable="dousajinlai"/>
 
 	<!-- Bitmoji -->
 	<item component="ComponentInfo{com.bitstrips.imoji/com.bitstrips.imoji.ui.activities.LandingActivity}" drawable="bitmoji"/>
 
 	<!-- ClevCalc -->
-	<item component="ComponentInfo{com.dencreak.dlcalculator/com.dencreak.dlcalculator.DLCalculatorActivity}" drawable="阿迪摄氏度"/>
+	<item component="ComponentInfo{com.dencreak.dlcalculator/com.dencreak.dlcalculator.DLCalculatorActivity}" drawable="adisheshidu"/>
 
 	<!-- Calculator -->
 	<item component="ComponentInfo{com.sec.android.app.popupcalculator/com.sec.android.app.popupcalculator.Calculator}" drawable="calculator"/>
@@ -28,7 +28,7 @@
 	<item component="ComponentInfo{com.discord/com.discord.main.MainActivity}" drawable="discord"/>
 
 	<!-- Duo Mobile -->
-	<item component="ComponentInfo{com.duosecurity.duomobile/com.duosecurity.duomobile.account_list.AccountListActivity}" drawable="啊是大叔"/>
+	<item component="ComponentInfo{com.duosecurity.duomobile/com.duosecurity.duomobile.account_list.AccountListActivity}" drawable="ashidashu"/>
 
 	<!-- Freebie Alerts -->
 	<item component="ComponentInfo{com.rodolfogs.nextdooralerts/host.exp.exponent.MainActivity}" drawable="freebie_alerts"/>
@@ -49,7 +49,7 @@
 	<item component="ComponentInfo{com.google.android.apps.tachyon/com.google.android.apps.tachyon.MainActivitySecondLauncher}" drawable="meet"/>
 
 	<!-- Meeting Notes -->
-	<item component="ComponentInfo{com.meetings.recorder/com.meetings.recorder.SessionActivity}" drawable="阿斯顿"/>
+	<item component="ComponentInfo{com.meetings.recorder/com.meetings.recorder.SessionActivity}" drawable="asidun"/>
 
 	<!-- McAfee Security -->
 	<item component="ComponentInfo{com.wsandroid.suite.tmobile/com.mcafee.app.LauncherDelegateActivity}" drawable="mcafee_security"/>
@@ -70,7 +70,7 @@
 	<item component="ComponentInfo{com.offerup/com.offerup.MainActivity}" drawable="offerup"/>
 
 	<!-- Pocket Casts -->
-	<item component="ComponentInfo{au.com.shiftyjelly.pocketcasts/au.com.shiftyjelly.pocketcasts.ui.MainActivity}" drawable="啊是大叔"/>
+	<item component="ComponentInfo{au.com.shiftyjelly.pocketcasts/au.com.shiftyjelly.pocketcasts.ui.MainActivity}" drawable="ashidashu"/>
 
 	<!-- Reminder -->
 	<item component="ComponentInfo{com.samsung.android.app.reminder/com.samsung.android.app.reminder.ui.LaunchMainActivity}" drawable="reminder"/>

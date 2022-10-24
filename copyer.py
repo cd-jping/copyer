@@ -139,7 +139,7 @@ def rename_file(file_list: list, file_dir: str):
         print("No File Changed!")
     else:
         print(str(len(chinese_list)) + " files")
-        txt_name = os.path.join(png_dir, "Changed.txt")
+        txt_name = os.path.join(file_dir, "Changed.txt")
         file = open(txt_name, 'w', encoding='utf-8')
         # 遍历字典的元素，将每项元素的key和value分拆组成字符串，注意添加分隔符和换行符
         for k, v in chinese_list.items():
@@ -206,16 +206,16 @@ def pinyinized_xml(result_dict: dict, find_name: str, find_node: str, find_prope
             xml_tree.write(result_dict.get(key), encoding="utf-8", xml_declaration=True)
 
 
-#  project_dir: dict, png_list, req_name: str,
-def move_xml_info(req_xml_dir: dict, project_xml_dir: dict, pnglist: list, req_name: str, appfilter_num: int):
+def move_xml_info(req_xml_dir: dict, project_xml_dir: dict, pnglist: list, req_name: list, appfilter_num: int):
     for pro_key in project_xml_dir.keys():
         if "appfilter" in pro_key:
             xml_filter = open(project_xml_dir.get(pro_key), "r", encoding="utf-8")
             line_list = xml_filter.readlines()
             for line_item in line_list:
-                if req_name in line_item:
-                    print(f"{req_name} 已适配")
-                    return
+                for i in req_name:
+                    if i in line_item:
+                        print(f"{req_name} 已适配")
+                        return
     # 追加xml节点信息
     for req_key in req_xml_dir.keys():
         # 根据filter_name 的值 来判断key 是否匹配 筛选出来所需要处理的xml
@@ -236,6 +236,7 @@ def move_xml_info(req_xml_dir: dict, project_xml_dir: dict, pnglist: list, req_n
                     comments.tail = "\n"
                     pro_xml_root.append(comments)
                     pro_xml_tree.write(project_xml_dir.get(pro_key), encoding="utf-8", xml_declaration=True)
+                    print(f"appfilter 已经处理 {req_key}")
 
         if "appmap" in req_key:
             req_xml_tree = lxml_et.parse(req_xml_dir.get(req_key))
@@ -254,6 +255,7 @@ def move_xml_info(req_xml_dir: dict, project_xml_dir: dict, pnglist: list, req_n
                     comments.tail = "\n"
                     pro_xml_root.append(comments)
                     pro_xml_tree.write(project_xml_dir.get(pro_key), encoding="utf-8", xml_declaration=True)
+                    print(f"appmap 已经处理 {req_key}")
         if "theme_resources" in req_key:
             req_xml_tree = lxml_et.parse(req_xml_dir.get(req_key))
             req_xml_root = req_xml_tree.getroot()
@@ -272,6 +274,7 @@ def move_xml_info(req_xml_dir: dict, project_xml_dir: dict, pnglist: list, req_n
                     comments.tail = "\n"
                     pro_xml_root.append(comments)
                     pro_xml_tree.write(project_xml_dir.get(pro_key), encoding="utf-8", xml_declaration=True)
+                    print(f"theme_res 已经处理 {req_key}")
 
     # 根据 png 生成 drawable 和 icon_pack 节点并追加到 目标路径
     for pro_key in project_xml_dir.keys():
@@ -293,6 +296,7 @@ def move_xml_info(req_xml_dir: dict, project_xml_dir: dict, pnglist: list, req_n
             tar_tag.insert(0, comments)
             icon_pack_tree.write(project_xml_dir.get(pro_key), encoding="utf-8", xml_declaration=True,
                                  pretty_print=True)
+            print(f"icon_pack 已经处理 {pro_key}")
 
         # drawable 资源生成
         if "drawable" in pro_key:
@@ -314,6 +318,7 @@ def move_xml_info(req_xml_dir: dict, project_xml_dir: dict, pnglist: list, req_n
             tar_tag.addnext(comments)
             drawable_tree.write(project_xml_dir.get(pro_key), encoding="utf-8", xml_declaration=True,
                                 pretty_print=True)
+            print(f"drawable 已经处理 {pro_key}")
         # project 路径里面 统计app filter 的总item数量 减去上次的数字
         if "changelog" in pro_key:
             # resources
@@ -330,6 +335,7 @@ def move_xml_info(req_xml_dir: dict, project_xml_dir: dict, pnglist: list, req_n
             tar_tag.set("text", f"{number} icons updated!\n{number} 个图标已适配!")
             changelog_tree.write(project_xml_dir.get(pro_key), encoding="utf-8", xml_declaration=True,
                                  pretty_print=True)
+            print(f"changelog 已经处理 {pro_key}")
         # 复制 png 资源（考虑覆盖问题）
 
 
@@ -351,28 +357,28 @@ def find_file(project_dir: str, find_name: list):
     return find_xml
 
 
-xml_file_dir = "/Users/wangjiping/PycharmProjects/copyer/IconRequest-20221001_122347"
-xml_file_dir3 = "/Users/WangChunsheng/PycharmProjects/copyer/IconRequest-20221001_122347"
-xml_file_dir2 = r"C:\Users\YOWH\PycharmProjects\copyer\IconRequest-20221001_122347"
+# xml_file_dir = "/Users/wangjiping/PycharmProjects/copyer/IconRequest-20221001_122347"
+# xml_file_dir3 = "/Users/WangChunsheng/PycharmProjects/copyer/IconRequest-20221001_122347"
+# xml_file_dir2 = r"C:\Users\YOWH\PycharmProjects\copyer\IconRequest-20221001_122347"
 
-rdict = {"appfilter_12331": "string1", "avpfilter_2331": "strin3234g1", "appfilter_123431": "3424", }
+# rdict = {"appfilter_12331": "string1", "avpfilter_2331": "strin3234g1", "appfilter_123431": "3424", }
 # read_xml(rdict, "filter")
 
 # rs_list = ff.filter_files(xml_file_dir2, prefix=["app", "theme"], suffix=[".xml"])
 # appmaplist = read_xml(rs_list, "appmap", "item", "name")
 # rename_xml(appmaplist,"item","name")
 
-png_dir = "/Users/WangChunsheng/PycharmProjects/copyer/IconRequest-20221001_122347"
-png_dir2 = "/Users/wangjiping/PycharmProjects/copyer/IconRequest-20221001_122347"
-png_list = ff.filter_suffix(suffix=[".png"], file_list=None,
-                            file_dir=png_dir2, with_ext_name=False)
-
-print(png_list)
+# png_dir = "/Users/WangChunsheng/PycharmProjects/copyer/IconRequest-20221001_122347"
+# png_dir2 = "/Users/wangjiping/PycharmProjects/copyer/IconRequest-20221001_122347"
+# png_list = ff.filter_suffix(suffix=[".png"], file_list=None,
+#                             file_dir=png_dir2, with_ext_name=False)
+#
+# print(png_list)
 
 # rename_file(png_list, file_dir=png_dir)
-xml_dict = ff.filter_files(xml_file_dir, prefix=["appfilter", "appmap", "theme_resources"], suffix=[".xml"])
-print(xml_dict)
-pinyinized_xml(xml_dict, "theme", "AppIcon", "image")
+# xml_dict = ff.filter_files(xml_file_dir, prefix=["appfilter", "appmap", "theme_resources"], suffix=[".xml"])
+# print(xml_dict)
+# pinyinized_xml(xml_dict, "theme", "AppIcon", "image")
 
 # project_dir = input("输入包含替换资源的项目文件夹\n")
 # name = "appfilter"
@@ -409,71 +415,84 @@ pinyinized_xml(xml_dict, "theme", "AppIcon", "image")
 #  project_dir: dict, png_list, req_name: str,
 
 def user_input(tipinf: str, cur_dir: bool = False):
-    tip = "拷贝文件夹路径快捷键\nmacOS:\toption + command + c\nWindows:\tshift + RightClick\n"
+
     str_input = input(tipinf)
-    print(tip)
-    if str_input =="q":
-        return str_input
+
+    if str_input == "q":
+        exit()
+        return
     if cur_dir is True:
-        if str_input is "":
+        if str_input == "":
             str_input = os.getcwd()
             return str_input
         elif bool(os.path.isdir(str_input)) is False:
             print("文件夹目录有误")
             user_input(tipinf, cur_dir=True)
     else:
-        if str_input is "" or bool(os.path.isdir(str_input)) is False:
+        if str_input == "" or bool(os.path.isdir(str_input)) is False:
             print("文件夹目录有误")
             user_input(tipinf)
     return str_input
 
 
 def menu_number(input_str: str):
-    ff = FilterFiles()
+
     match input_str:
         case "1":
-            req_icon_dir = user_input(tipinf="请输入 req_icon 文件夹路径(如在 req_icon 文件夹 按 Enter)\nq:退出",
+            req_icon_dir = user_input(tipinf="请输入 req_icon 文件夹路径(如在 req_icon 文件夹 按 Enter)\nq:退出\n",
                                       cur_dir=True)
-            if req_icon_dir == "q":
-                menu_number("q")
-            req_dir_dict = ff.filter_files(req_icon_dir)
-            pinyinized_xml(req_dir_dict, find_name="appfilter", find_node="item", find_property="drawable")
-            pinyinized_xml(req_dir_dict, find_name="appmap", find_node="item", find_property="name")
-            pinyinized_xml(req_dir_dict, find_name="theme_resources", find_node="AppIcon", find_property="image")
+            req_dir_dict = ff.filter_files(file_dir=req_icon_dir, prefix=["appfilter", "appmap", "theme_resources"],
+                                           suffix=[".xml"])
+            pinyinized_xml(result_dict=req_dir_dict, find_name="appfilter", find_node="item", find_property="drawable")
+            pinyinized_xml(result_dict=req_dir_dict, find_name="appmap", find_node="item", find_property="name")
+            pinyinized_xml(result_dict=req_dir_dict, find_name="theme_resources", find_node="AppIcon", find_property="image")
         case "2":
-            req_icon_dir = user_input(tipinf="请输入 req_icon 文件夹路径\nq:退出")
-            if req_icon_dir == "q":
-                menu_number("q")
+            req_icon_dir = user_input(tipinf="请输入 req_icon 文件夹路径\nq:退出\n")
+
             req_xml_dict = ff.filter_files(file_dir=req_icon_dir, prefix=["appfilter", "appmap", "theme_resources"],
                                            suffix=[".xml"])
             png_number = ff.filter_suffix(suffix=[".png"], file_dir=req_icon_dir)
             icon_number = len(png_number)
+            req_name = list(req_xml_dict.keys())
             project_dir = user_input(tipinf="请输入项目文件夹路径\nq:退出")
             if project_dir == "q":
                 menu_number("q")
-            project_xml_dict = find_file(project_dir, find_name=["appfilter","appmap","theme_resources","drawable","icon_pack"])
+            project_xml_dict = find_file(project_dir,
+                                         find_name=["appfilter", "appmap", "theme_resources", "drawable", "icon_pack"])
 
-            reqname 改成list；
-            get pngicondir
+            # reqname 改成list；
+            # get pngicondir
+            png_dir = user_input(tipinf="请输入 已制作图标 文件夹路径\nq:退出")
+            if req_icon_dir == "q":
+                menu_number("q")
+            png_list = ff.filter_suffix(suffix=[".png"], file_dir=png_dir)
 
+            move_xml_info(req_xml_dict, project_xml_dir=project_xml_dict, appfilter_num=icon_number, req_name=req_name,
+                          pnglist=png_list)
 
-            move_xml_info(req_xml_dict,project_xml_dir=project_xml_dict, appfilter_num=icon_number, )
             print("2")
         case "q" | "Q":
             print("exit")
+            exit()
         case _:
-            os.system('cls')
+            if os.name == 'nt':  # 如果当前系统为WINDOWS
+                os.system('cls')  # 执行cls清屏命令
+            else:
+                os.system('clear')  # 其它linux等系统执行clear命令
             print(menulist)
             menu_number(input("请输入序号\n"))
 
 
 menulist = """
-    "1": "重命名为中文名称为 pinyin"
-    "2": "拷贝 XML 信息到项目文件夹"
-    ----------------------------
-    "Q": "退出 copyer"
+"1": "重命名为中文名称为 pinyin"
+"2": "拷贝 XML 信息到项目文件夹"
+----------------------------
+"Q": "退出 copyer"
 """
 
 # ff = FilterFiles()
-input_number = input("input number")
+tip = "拷贝文件夹路径快捷键\nmacOS:\toption + command + c\nWindows:\tshift + RightClick\n"
+print(tip)
+input_number = input(menulist)
+ff = FilterFiles()
 menu_number(input_number)
