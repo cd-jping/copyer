@@ -236,7 +236,7 @@ def move_xml_info(req_xml_dir: dict, project_xml_dir: dict, pnglist: list, req_n
             for pro_key in project_xml_dir.keys():
                 print(pro_key)
                 if "appfilter" in pro_key:
-                    print( "appfilter from project")
+                    print("appfilter from project")
                     pro_xml_tree = lxml_et.parse(project_xml_dir.get(pro_key))
                     pro_xml_root = pro_xml_tree.getroot()
                     num = len(req_xml_root.findall("item"))
@@ -352,24 +352,36 @@ def move_xml_info(req_xml_dir: dict, project_xml_dir: dict, pnglist: list, req_n
 def find_file(project_dir: str, find_name: list):
     find_xml = {}
     count = 0
-    file_list = os.listdir(project_dir)
-    for file in file_list:
-        file_path = os.path.join(project_dir, file)
-        if os.path.isfile(file_path):
-            for name in find_name:
-                if name in file:
+    for root, dirs, files in os.walk(project_dir):
+        for file in files:
+            for f_name in find_name:
+                if f_name in file:
                     count = count + 1
                     file = file + str(count)
+                    file_path = os.path.join(root, file)
                     find_xml.update({file: file_path})
-                    print(find_xml)
-                    print(count)
-                    # print(file_path)
-
-        else:
-            find_file(file_path, find_name)
-
-    print(find_xml)
     return find_xml
+
+    # find_xml = {}
+    # count = 0
+    # file_list = os.listdir(project_dir)
+    # for file in file_list:
+    #     file_path = os.path.join(project_dir, file)
+    #     if os.path.isfile(file_path):
+    #         for name in find_name:
+    #             if name in file:
+    #                 count = count + 1
+    #                 file = file + str(count)
+    #                 find_xml.update({file: file_path})
+    #                 print(find_xml)
+    #                 print(count)
+    #                 # print(file_path)
+    #
+    #     else:
+    #         find_file(file_path, find_name)
+    #
+    # print(find_xml)
+    # return find_xml
 
 
 # xml_file_dir = "/Users/wangjiping/PycharmProjects/copyer/IconRequest-20221001_122347"
@@ -430,7 +442,6 @@ def find_file(project_dir: str, find_name: list):
 #  project_dir: dict, png_list, req_name: str,
 
 def user_input(tipinf: str, cur_dir: bool = False):
-
     str_input = input(tipinf)
 
     if str_input == "q":
@@ -451,7 +462,6 @@ def user_input(tipinf: str, cur_dir: bool = False):
 
 
 def menu_number(input_str: str):
-
     match input_str:
         case "1":
             req_icon_dir = user_input(tipinf="请输入 req_icon 文件夹路径(如在 req_icon 文件夹 按 Enter)\nq:退出\n",
@@ -460,7 +470,8 @@ def menu_number(input_str: str):
                                            suffix=[".xml"])
             pinyinized_xml(result_dict=req_dir_dict, find_name="appfilter", find_node="item", find_property="drawable")
             pinyinized_xml(result_dict=req_dir_dict, find_name="appmap", find_node="item", find_property="name")
-            pinyinized_xml(result_dict=req_dir_dict, find_name="theme_resources", find_node="AppIcon", find_property="image")
+            pinyinized_xml(result_dict=req_dir_dict, find_name="theme_resources", find_node="AppIcon",
+                           find_property="image")
         case "2":
             req_icon_dir = user_input(tipinf="请输入 req_icon 文件夹路径\nq:退出\n")
 
@@ -481,7 +492,7 @@ def menu_number(input_str: str):
             png_dir = user_input(tipinf="请输入 已制作图标 文件夹路径\nq:退出\n")
             # if req_icon_dir == "q":
             #     menu_number("q")
-            png_list = ff.filter_suffix(suffix=[".png"], file_dir=png_dir,with_ext_name=False)
+            png_list = ff.filter_suffix(suffix=[".png"], file_dir=png_dir, with_ext_name=False)
             print(png_list)
             move_xml_info(req_xml_dict, project_xml_dir=project_xml_dict, appfilter_num=icon_number, req_name=req_name,
                           pnglist=png_list)
@@ -514,7 +525,6 @@ ff = FilterFiles()
 # menu_number(input_number)
 
 
-
 # req_icon_dir = user_input(tipinf="请输入 req_icon 文件夹路径\nq:退出\n")
 req_icon_dir = "/Users/wangjiping/Downloads/IconRequest-20221001_122347"
 
@@ -537,7 +547,7 @@ print(project_xml_dict)
 png_dir = "/Users/wangjiping/Downloads/IconRequest-20221001_122347"
 # if req_icon_dir == "q":
 #     menu_number("q")
-png_list = ff.filter_suffix(suffix=[".png"], file_dir=png_dir,with_ext_name=False)
+png_list = ff.filter_suffix(suffix=[".png"], file_dir=png_dir, with_ext_name=False)
 print(png_list)
 move_xml_info(req_xml_dict, project_xml_dir=project_xml_dict, appfilter_num=icon_number, req_name=req_name,
               pnglist=png_list)
