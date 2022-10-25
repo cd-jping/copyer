@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<appmap>
+
+    <!-- Google Play Movies -->
+    <item class="com.google.android.videos.GoogleTvEntryPoint" name="google_play_movies"/>
+
+    <!-- Google Play Music -->
+    <item class="com.google.android.music.tombstone.LauncherActivity" name="google_play_music"/>
+
+    <!-- Maps -->
+    <item class="com.google.android.maps.MapsActivity" name="google_maps"/>
+
+<!--⬆ appmap_20221013_222414.xml updated, 0 ⬆-->
+</appmap>

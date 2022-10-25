@@ -1,0 +1,22 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<Theme version="1">
+    <Label value="Blueprint"/>
+    <Wallpaper image="wallpaper_01"/>
+    <LockScreenWallpaper image="wallpaper_02"/>
+    <ThemePreview image="preview1"/>
+    <ThemePreviewWork image="preview1"/>
+    <ThemePreviewMenu image="preview1"/>
+    <DockMenuAppIcon selector="drawer"/>
+
+    <!-- Google Play Movies -->
+    <AppIcon name="com.google.android.videos/com.google.android.videos.GoogleTvEntryPoint" image="google_play_movies"/>
+
+    <!-- Google Play Music -->
+    <AppIcon name="com.google.android.music/com.google.android.music.tombstone.LauncherActivity" image="google_play_music"/>
+
+    <!-- Maps -->
+    <AppIcon name="com.google.android.apps.maps/com.google.android.maps.MapsActivity" image="google_maps"/>
+
+
+<!--⬆ theme_resources_20221013_222414.xml updated, 0 ⬆-->
+</Theme>

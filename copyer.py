@@ -240,7 +240,7 @@ def move_xml_info(req_xml_dir: dict, project_xml_dir: dict, pnglist: list, req_n
                     pro_xml_tree = lxml_et.parse(project_xml_dir.get(pro_key))
                     pro_xml_root = pro_xml_tree.getroot()
                     num = len(req_xml_root.findall("item"))
-                    for item in req_xml_root.iter("appfilter"):
+                    for item in req_xml_root.iter("resources"):
                         pro_xml_root.extend(item)
                     comments = lxml_et.Comment(f"⬆ {req_key} updated, {num} ⬆")
                     comments.tail = "\n"
@@ -278,6 +278,7 @@ def move_xml_info(req_xml_dir: dict, project_xml_dir: dict, pnglist: list, req_n
                     pro_xml_tree = lxml_et.parse(project_xml_dir.get(pro_key))
                     pro_xml_root = pro_xml_tree.getroot()
                     num = len(req_xml_root.findall("AppIcon"))
+                    print("theme copy ")
                     for item in req_xml_root.iter("Theme"):
                         pro_xml_root.extend(item)
                     comments = lxml_et.Comment(f"⬆ {req_key} updated, {num} ⬆")
@@ -290,11 +291,13 @@ def move_xml_info(req_xml_dir: dict, project_xml_dir: dict, pnglist: list, req_n
     for pro_key in project_xml_dir.keys():
         # icon_pack 资源生成
         if "icon_pack" in pro_key:
+            print("icon_pack prokey")
             icon_pack_tree = lxml_et.parse(project_xml_dir.get(pro_key),
                                            parser=lxml_et.XMLParser(encoding="utf-8", remove_blank_text=True))
             icon_pack_root = icon_pack_tree.getroot()
             if icon_pack_root.find("./starry-array/[@name='Adaptation']") is None:
                 tar_tag = lxml_et.Element("starry-array", name="Adaptation")
+                icon_pack_root.append(tar_tag)
             else:
                 tar_tag = icon_pack_root.find("./starry-array/[@name='Adaptation']")
             num = len(pnglist)
@@ -337,12 +340,14 @@ def move_xml_info(req_xml_dir: dict, project_xml_dir: dict, pnglist: list, req_n
             if changelog_root.find("./item/[@number]") is None:
                 tar_tag = lxml_et.Element("item", number="0")
                 changelog_root.append(tar_tag)
+                print("changelog kong")
             else:
                 tar_tag = changelog_root.find("./item/[@number]")
+                print("changelog else", tar_tag)
             xml_number = tar_tag.get("number")
             number = appfilter_num + int(xml_number)
             tar_tag.set("number", str(number))
-            tar_tag.set("text", f"{number} icons updated!\n{number} 个图标已适配!")
+            tar_tag.set("text", f" {number} icons updated!\n {number} 个图标已适配!")
             changelog_tree.write(project_xml_dir.get(pro_key), encoding="utf-8", xml_declaration=True,
                                  pretty_print=True)
             print(f"changelog 已经处理 {pro_key}")
@@ -357,9 +362,11 @@ def find_file(project_dir: str, find_name: list):
             for f_name in find_name:
                 if f_name in file:
                     count = count + 1
-                    file = file + str(count)
+                    file_name = file
+                    file_name = os.path.splitext(file)[0]
+                    file_name = file_name + str(count)
                     file_path = os.path.join(root, file)
-                    find_xml.update({file: file_path})
+                    find_xml.update({file_name: file_path})
     return find_xml
 
     # find_xml = {}
@@ -526,7 +533,7 @@ ff = FilterFiles()
 
 
 # req_icon_dir = user_input(tipinf="请输入 req_icon 文件夹路径\nq:退出\n")
-req_icon_dir = "/Users/wangjiping/Downloads/IconRequest-20221001_122347"
+req_icon_dir = "/Users/WangChunsheng/PycharmProjects/copyer/IconRequest-20221013_222149"
 
 req_xml_dict = ff.filter_files(file_dir=req_icon_dir, prefix=["appfilter", "appmap", "theme_resources"],
                                suffix=[".xml"])
@@ -534,7 +541,7 @@ png_number = ff.filter_suffix(suffix=[".png"], file_dir=req_icon_dir)
 icon_number = len(png_number)
 req_name = list(req_xml_dict.keys())
 # project_dir = user_input(tipinf="请输入项目文件夹路径\nq:退出\n")
-project_dir = "/Users/wangjiping/Downloads/demo"
+project_dir = "/Users/WangChunsheng/PycharmProjects/copyer/demo"
 # if project_dir == "q":
 #     menu_number("q")
 print("p xml ")
@@ -544,7 +551,7 @@ print(project_xml_dict)
 # reqname 改成list；
 # get pngicondir
 # png_dir = user_input(tipinf="请输入 已制作图标 文件夹路径\nq:退出\n")
-png_dir = "/Users/wangjiping/Downloads/IconRequest-20221001_122347"
+png_dir = "/Users/WangChunsheng/PycharmProjects/copyer/IconRequest-20221013_222149"
 # if req_icon_dir == "q":
 #     menu_number("q")
 png_list = ff.filter_suffix(suffix=[".png"], file_dir=png_dir, with_ext_name=False)

@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+  <version>1</version>
+  <category title="More ICONS Open       ↗ "/>
+  <category name="System ICONS"/>
+  <!--⬇ 35 icons updated ⬇-->
+  <item drawable="mcdonald_s"/>
+  <item drawable="maps"/>
+  <item drawable="snapchat"/>
+  <item drawable="支付宝"/>
+  <item drawable="messages"/>
+  <item drawable="google_play_store"/>
+  <item drawable="photos"/>
+  <item drawable="camera"/>
+  <item drawable="max_cleaner"/>
+  <item drawable="google"/>
+  <item drawable="whatsapp"/>
+  <item drawable="espn"/>
+  <item drawable="contacts"/>
+  <item drawable="youtube"/>
+  <item drawable="clock"/>
+  <item drawable="phone"/>
+  <item drawable="google_play_movies"/>
+  <item drawable="drive"/>
+  <item drawable="calendar"/>
+  <item drawable="messenger"/>
+  <item drawable="nasa"/>
+  <item drawable="chrome"/>
+  <item drawable="tiktok"/>
+  <item drawable="youtube_music"/>
+  <item drawable="gmail"/>
+  <item drawable="webview_shell"/>
+  <item drawable="capcut"/>
+  <item drawable="files"/>
+  <item drawable="amazon_shopping"/>
+  <item drawable="instagram"/>
+  <item drawable="settings"/>
+  <item drawable="cash_app"/>
+  <item drawable="酷安"/>
+  <item drawable="duo"/>
+  <item drawable="telegram"/>
+</resources>
