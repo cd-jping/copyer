@@ -11,5 +11,4 @@ for root, dirs, files in os.walk("/Users/WangChunsheng/Downloads/demo"):
                 file = file + str(count)
                 file_path = os.path.join(root, file)
                 find_xml.update({file: file_path})
-
 print(find_xml)
