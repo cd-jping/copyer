@@ -304,7 +304,7 @@ def find_file(project_dir: str, find_name: list):
     return find_xml
 
 
-# 接收用户输入的路径，curdir可以允许使用当前路径处理（仅限pinyinized）
+# 接收用户输入的路径，cur_dir可以允许使用当前路径处理（仅限pinyinized）
 def user_input(tipinf: str, cur_dir: bool = False):
     # 提示信息
     str_input = input(tipinf)
