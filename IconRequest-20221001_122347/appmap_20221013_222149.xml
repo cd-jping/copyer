@@ -1,0 +1,178 @@
+<appmap>
+
+	<!-- Amazon Shopping -->
+	<item
+		class="com.amazon.mShop.home.HomeActivity"
+		name="amazon_shopping"/>
+
+	<!-- Calendar -->
+	<item
+		class="com.android.calendar.AllInOneActivity"
+		name="calendar"/>
+
+	<!-- Camera -->
+	<item
+		class="com.android.camera.CameraLauncher"
+		name="camera"/>
+
+	<!-- CapCut -->
+	<item
+		class="com.vega.main.MainActivity"
+		name="capcut"/>
+
+	<!-- Cash App -->
+	<item
+		class="com.squareup.cash.ui.MainActivity"
+		name="cash_app"/>
+
+	<!-- Chrome -->
+	<item
+		class="com.google.android.apps.chrome.Main"
+		name="chrome"/>
+
+	<!-- Clock -->
+	<item
+		class="com.android.deskclock.DeskClock"
+		name="clock"/>
+
+	<!-- Contacts -->
+	<item
+		class="com.android.contacts.activities.PeopleActivity"
+		name="contacts"/>
+
+	<!-- Drive -->
+	<item
+		class="com.google.android.apps.docs.app.NewMainProxyActivity"
+		name="drive"/>
+
+	<!-- Duo -->
+	<item
+		class="com.google.android.apps.tachyon.MainActivity"
+		name="duo"/>
+
+	<!-- ESPN -->
+	<item
+		class="com.espn.sportscenter.ui.EspnLaunchActivity"
+		name="espn"/>
+
+	<!-- Files -->
+	<item
+		class="com.android.documentsui.LauncherActivity"
+		name="files"/>
+
+	<!-- Gmail -->
+	<item
+		class="com.google.android.gm.ConversationListActivityGmail"
+		name="gmail"/>
+
+	<!-- Google -->
+	<item
+		class="com.google.android.googlequicksearchbox.VoiceSearchActivity"
+		name="google"/>
+
+	<!-- Google Play Movies -->
+	<item
+		class="com.google.android.youtube.videos.EntryPoint"
+		name="google_play_movies"/>
+
+	<!-- Google Play Store -->
+	<item
+		class="com.android.vending.AssetBrowserActivity"
+		name="google_play_store"/>
+
+	<!-- Instagram -->
+	<item
+		class="com.instagram.android.activity.MainTabActivity"
+		name="instagram"/>
+
+	<!-- Maps -->
+	<item
+		class="com.google.android.maps.MapsActivity"
+		name="maps"/>
+
+	<!-- Max Cleaner -->
+	<item
+		class="a.a.a.a.a.a.a.Hhjhjjhqjoipipilmo"
+		name="max_cleaner"/>
+
+	<!-- McDonald S -->
+	<item
+		class="com.mcdonalds.mcdcoreapp.common.activity.SplashActivity"
+		name="mcdonald_s"/>
+
+	<!-- Messages -->
+	<item
+		class="com.google.android.apps.messaging.ui.ConversationListActivity"
+		name="messages"/>
+
+	<!-- Messenger -->
+	<item
+		class="com.facebook.orca.auth.StartScreenActivity"
+		name="messenger"/>
+
+	<!-- NASA -->
+	<item
+		class="gov.nasa.MainActivity"
+		name="nasa"/>
+
+	<!-- Phone -->
+	<item
+		class="com.android.dialer.main.impl.MainActivity"
+		name="phone"/>
+
+	<!-- Photos -->
+	<item
+		class="com.google.android.apps.photos.home.HomeActivity"
+		name="photos"/>
+
+	<!-- Settings -->
+	<item
+		class="com.android.settings.Settings"
+		name="settings"/>
+
+	<!-- Snapchat -->
+	<item
+		class="com.snapchat.android.LandingPageActivity"
+		name="snapchat"/>
+
+	<!-- Telegram -->
+	<item
+		class="org.telegram.messenger.DefaultIcon"
+		name="telegram"/>
+
+	<!-- TikTok -->
+	<item
+		class="com.ss.android.ugc.aweme.splash.SplashActivity"
+		name="tiktok"/>
+
+	<!-- WebView Shell -->
+	<item
+		class="org.chromium.webview_shell.WebViewBrowserActivity"
+		name="webview_shell"/>
+
+	<!-- WhatsApp -->
+	<item
+		class="com.whatsapp.Main"
+		name="whatsapp"/>
+
+	<!-- YouTube -->
+	<item
+		class="com.google.android.youtube.app.honeycomb.Shell$HomeActivity"
+		name="youtube"/>
+
+	<!-- YouTube Music -->
+	<item
+		class="com.google.android.apps.youtube.music.activities.MusicActivity"
+		name="youtube_music"/>
+
+	<!-- 支付宝 -->
+	<item
+		class="com.eg.android.AlipayGphone.AlipayLogin"
+		name="支付宝"/>
+
+	<!-- 酷安 -->
+	<item
+		class="com.coolapk.market.view.main.MainActivity"
+		name="酷安"/>
+
+</appmap>
