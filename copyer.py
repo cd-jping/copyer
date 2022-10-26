@@ -229,7 +229,6 @@ def move_xml_info(req_xml_dir: dict, project_xml_dir: dict, pnglist: list, req_n
     for pro_key in project_xml_dir.keys():
         # icon_pack 资源生成
         if "icon_pack" in pro_key:
-            print("icon_pack prokey")
             icon_pack_tree = lxml_et.parse(project_xml_dir.get(pro_key),
                                            parser=lxml_et.XMLParser(encoding="utf-8", remove_blank_text=True))
             icon_pack_root = icon_pack_tree.getroot()
@@ -254,11 +253,11 @@ def move_xml_info(req_xml_dir: dict, project_xml_dir: dict, pnglist: list, req_n
             drawable_tree = lxml_et.parse(project_xml_dir.get(pro_key),
                                           parser=lxml_et.XMLParser(encoding="utf-8", remove_blank_text=True))
             drawable_root = drawable_tree.getroot()
-            if drawable_root.find("./category/[@title='System ICONS']") is None:
-                tar_tag = lxml_et.Element("category", name="System ICONS")
+            if drawable_root.find("./category/[@title='All ICONS']") is None:
+                tar_tag = lxml_et.Element("category", name="All ICONS")
                 drawable_root.append(tar_tag)
             else:
-                tar_tag = drawable_root.find("./category/[@title='System ICONS']")
+                tar_tag = drawable_root.find("./category/[@title='All ICONS']")
             num = len(pnglist)
             for png_name in pnglist:
                 item = lxml_et.Element("item")
@@ -276,10 +275,8 @@ def move_xml_info(req_xml_dir: dict, project_xml_dir: dict, pnglist: list, req_n
             if changelog_root.find("./item/[@number]") is None:
                 tar_tag = lxml_et.Element("item", number="0")
                 changelog_root.append(tar_tag)
-                print("changelog kong")
             else:
                 tar_tag = changelog_root.find("./item/[@number]")
-                print("changelog else", tar_tag)
             xml_number = tar_tag.get("number")
             number = appfilter_num + int(xml_number)
             tar_tag.set("number", str(number))
