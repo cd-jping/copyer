@@ -1,5 +1,6 @@
 import copy
 import os
+
 import lxml.etree as lxml_et
 import pypinyin
 
@@ -22,6 +23,8 @@ FilterFiles 文件过滤器
 实现了可以根据多个关键词 前缀 或 后缀 匹配文件名；返回一个字典{filename:filepath}
 后续可以根据字典直接取对应的文件路径。
 """
+
+
 class FilterFiles:
     def filter_files(self, file_dir, prefix: list = None, suffix: list = None):
         result = {}
@@ -67,7 +70,6 @@ class FilterFiles:
                         item = os.path.splitext(item)[0]
                     rs.append(item)
         return rs
-
 
     @staticmethod
     def filter_suffix(suffix: list, file_list: list = None, file_dir=None, with_ext_name: bool = True):
@@ -128,6 +130,7 @@ def is_chinese(string):
         if u'\u4e00' <= ch <= u'\u9fff':
             return True
     return False
+
 
 # 修改xml里面的中文；并且忽略注释中的中文名称
 def pinyinized_xml(result_dict: dict, find_name: str, find_node: str, find_property: str):
@@ -287,6 +290,7 @@ def move_xml_info(req_xml_dir: dict, project_xml_dir: dict, pnglist: list, req_n
                                  pretty_print=True)
             print(f"changelog 已经处理 {pro_key}")
 
+
 # 这个findfile会找出子目录所匹配的指定文件
 def find_file(project_dir: str, find_name: list):
     find_xml = {}
@@ -301,6 +305,7 @@ def find_file(project_dir: str, find_name: list):
                     file_path = os.path.join(root, file)
                     find_xml.update({file_name: file_path})
     return find_xml
+
 
 # 接收用户输入的路径，curdir可以允许使用当前路径处理（仅限pinyinized）
 def user_input(tipinf: str, cur_dir: bool = False):

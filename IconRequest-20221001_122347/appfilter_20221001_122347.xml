@@ -1,0 +1,22 @@
+<resources>
+	<iconback img1="iconback"/>
+	<iconmask img1="iconmask"/>
+	<iconupon img1="iconupon"/>
+	<scale factor="1.0"/>
+
+	<!-- Contacts -->
+	<item
+		component="ComponentInfo{com.samsung.android.app.contacts/com.samsung.android.contacts.contactslist.PeopleActivity}"
+		drawable="contacts"/>
+
+	<!-- Iconzy -->
+	<item
+		component="ComponentInfo{com.arun.kustomiconpack/com.arun.kustomiconpack.MainActivity}"
+		drawable="iconzy"/>
+
+	<!-- Loffee -->
+	<item
+		component="ComponentInfo{com.aqeb.loffee/com.example.aqeb.loffee.Activity.MainActivity}"
+		drawable="loffee"/>
+
+</resources>
