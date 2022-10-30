@@ -340,6 +340,8 @@ def menu_number(input_str: str):
             pinyinized_xml(result_dict=req_dir_dict, find_name="appmap", find_node="item", find_property="name")
             pinyinized_xml(result_dict=req_dir_dict, find_name="theme_resources", find_node="AppIcon",
                            find_property="image")
+            png_list = ff.filter_suffix(suffix=[".png"], file_dir=req_icon_dir)
+            rename_file(file_list=png_list, file_dir=req_icon_dir)
         case "2":
             if os.name == 'nt':  # 如果当前系统为WINDOWS
                 os.system('cls')  # 执行cls清屏命令
