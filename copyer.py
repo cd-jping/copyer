@@ -280,9 +280,10 @@ def move_xml_info(req_xml_dir: dict, project_xml_dir: dict, pnglist: list, req_n
             xml_number = tar_tag.get("number")
             number = appfilter_num + int(xml_number)
             tar_tag.set("number", str(number))
-            tar_tag.set("text",
-                        f"Current Update {appfilter_num} Icons, {number} Icons Updated!\\n"
-                        f"当前更新 {appfilter_num} 个图标, {number} 个图标已适配!")
+            # tar_tag.set("text",
+            #             f"Current Update {appfilter_num} Icons, {number} Icons Updated!\\n"
+            #             f"当前更新 {appfilter_num} 个图标, {number} 个图标已适配!")
+            tar_tag.text = f"Current Update {appfilter_num} Icons, {number} Icons Updated!\\n当前更新 {appfilter_num} 个图标, {number} 个图标已适配!"
             changelog_tree.write(project_xml_dir.get(pro_key), encoding="utf-8", xml_declaration=True,
                                  pretty_print=True)
             print(f"changelog 已经处理 {pro_key}")
