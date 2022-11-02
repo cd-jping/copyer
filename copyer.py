@@ -254,7 +254,7 @@ def move_xml_info(req_xml_dir: dict, project_xml_dir: dict, pnglist: list, req_n
                                           parser=lxml_et.XMLParser(encoding="utf-8", remove_blank_text=True))
             drawable_root = drawable_tree.getroot()
             if drawable_root.find("./category/[@title='All ICONS']") is None:
-                tar_tag = lxml_et.Element("category", name="All ICONS")
+                tar_tag = lxml_et.Element("category", title="All ICONS")
                 drawable_root.append(tar_tag)
             else:
                 tar_tag = drawable_root.find("./category/[@title='All ICONS']")
