@@ -210,7 +210,8 @@ def move_xml_info(req_xml_dir: dict, project_xml_dir: dict, pnglist: list, req_n
             del_list = ["Label", "Wallpaper", "LockScreenWallpaper", "ThemePreview", "ThemePreviewWork",
                         "ThemePreviewMenu", "DockMenuAppIcon"]
             for i in del_list:
-                req_xml_root.remove(req_xml_root.find(i))
+                if req_xml_root.find(i) is not None:
+                    req_xml_root.remove(req_xml_root.find(i))
             req_xml_root_bak = copy.copy(req_xml_root)
             for pro_key in project_xml_dir.keys():
                 if "theme_resources" in pro_key:
@@ -272,18 +273,30 @@ def move_xml_info(req_xml_dir: dict, project_xml_dir: dict, pnglist: list, req_n
         if "changelog" in pro_key:
             changelog_tree = lxml_et.parse(project_xml_dir.get(pro_key))
             changelog_root = changelog_tree.getroot()
-            if changelog_root.find("./item/[@number]") is None:
-                tar_tag = lxml_et.Element("item", number="0")
-                changelog_root.append(tar_tag)
+            if changelog_root.findall("string-array") is None:
+                if changelog_root.find("./item/[@number]") is None:
+                    tar_tag = lxml_et.Element("item", number="0")
+                    changelog_root.append(tar_tag)
+                else:
+                    tar_tag = changelog_root.find("./item/[@number]")
+                xml_number = tar_tag.get("number")
+                number = appfilter_num + int(xml_number)
+                tar_tag.set("number", str(number))
+                tar_tag.set("text",
+                            f"Current Update {appfilter_num} Icons, {number} Icons Updated!\\n"
+                            f"当前更新 {appfilter_num} 个图标, {number} 个图标已适配!")
             else:
-                tar_tag = changelog_root.find("./item/[@number]")
-            xml_number = tar_tag.get("number")
-            number = appfilter_num + int(xml_number)
-            tar_tag.set("number", str(number))
-            # tar_tag.set("text",
-            #             f"Current Update {appfilter_num} Icons, {number} Icons Updated!\\n"
-            #             f"当前更新 {appfilter_num} 个图标, {number} 个图标已适配!")
-            tar_tag.text = f"Current Update {appfilter_num} Icons, {number} Icons Updated!\\n当前更新 {appfilter_num} 个图标, {number} 个图标已适配!"
+                if changelog_root.find("./string-array/item/[@number]") is None:
+                    tar_tag = lxml_et.Element("item", number="0")
+                    changelog_root.append(tar_tag)
+                else:
+                    tar_tag = changelog_root.find("./string-array/item/[@number]")
+                xml_number = tar_tag.get("number")
+                number = appfilter_num + int(xml_number)
+                tar_tag.set("number", str(number))
+                tar_tag.text = f"Current Update {appfilter_num} Icons, {number} Icons Updated!\\n当前更新 {appfilter_num} 个图标, {number} 个图标已适配!"
+
+
             changelog_tree.write(project_xml_dir.get(pro_key), encoding="utf-8", xml_declaration=True,
                                  pretty_print=True)
             print(f"changelog 已经处理 {pro_key}")
